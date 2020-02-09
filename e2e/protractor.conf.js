@@ -3,6 +3,7 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
 const { SpecReporter } = require('jasmine-spec-reporter');
+const jasmineReporters = require('jasmine-reporters');
 
 /**
  * @type { import("protractor").Config }
@@ -31,5 +32,12 @@ exports.config = {
       project: require('path').join(__dirname, './tsconfig.json')
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({consolidateAll: true,
+      savePath: 'testresults',
+      filePrefix: 'protractor-test-results',
+      modifySuiteName: function (generatedSuiteName, suite) {
+        return 'e2e.' + generatedSuiteName; // whichever prefix you wish to use
+      } 
+    }));
   }
 };
