@@ -33,7 +33,7 @@ exports.config = {
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
     jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({consolidateAll: true,
-      savePath: 'testresults',
+      savePath: 'target/surefire-reports/',
       filePrefix: 'protractor-test-results',
       modifySuiteName: function (generatedSuiteName, suite) {
         return 'e2e.' + generatedSuiteName; // whichever prefix you wish to use
